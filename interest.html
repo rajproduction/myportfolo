@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interests</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <section class="py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">My Interests</h1>
+            <div class="row" id="interests-list">
+                <!-- JavaScript will dynamically insert interests here -->
+            </div>
+            <div class="text-center">
+                <a href="index.html" class="btn btn-primary mt-4">Back to Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Array of interests
+        const interests = [
+            { title: 'Software Engineering', description: 'I enjoy designing and building scalable software systems.' },
+            { title: 'Web Development', description: 'Creating user-friendly web applications is one of my passions.' },
+            { title: 'Software Development', description: 'Building solutions with various programming languages is my strength.' },
+            { title: 'Artificial Intelligence', description: 'I am fascinated by AI and machine learning technologies.' },
+            { title: 'Cloud Computing', description: 'Exploring cloud platforms like AWS and Azure is part of my interest.' }
+        ];
+
+        // Function to dynamically create and insert interest cards
+        function displayInterests() {
+            const interestsList = document.getElementById('interests-list');
+
+            interests.forEach(interest => {
+                const interestCard = `
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">${interest.title}</h4>
+                                <p class="card-text">${interest.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                interestsList.innerHTML += interestCard;
+            });
+        }
+
+        // Call the function to display the interests when the page loads
+        window.onload = displayInterests;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

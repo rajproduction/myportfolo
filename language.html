@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Languages</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <section class="py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Languages I Use</h1>
+            <div class="row" id="languages-list">
+                <!-- JavaScript will dynamically insert languages here -->
+            </div>
+            <div class="text-center">
+                <a href="index.html" class="btn btn-primary mt-4">Back to Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Array of programming languages
+        const languages = [
+            { name: 'Python', description: 'A powerful, high-level programming language used for web development, AI, and more.' },
+            { name: 'MongoDB', description: 'A NoSQL database program that uses JSON-like documents with schema.' },
+            { name: 'C++', description: 'A general-purpose programming language with object-oriented features.' },
+            { name: 'JavaScript', description: 'The language of the web, used to create dynamic websites and web applications.' },
+            { name: 'HTML/CSS', description: 'Markup and styling languages for building the structure and look of websites.' }
+        ];
+
+        // Function to dynamically create and insert language cards
+        function displayLanguages() {
+            const languagesList = document.getElementById('languages-list');
+
+            languages.forEach(language => {
+                const languageCard = `
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">${language.name}</h4>
+                                <p class="card-text">${language.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                languagesList.innerHTML += languageCard;
+            });
+        }
+
+        // Call the function to display the languages when the page loads
+        window.onload = displayLanguages;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

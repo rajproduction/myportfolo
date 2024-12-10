@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Books</title>
+    <style>
+        body {
+            background-color: lightblue;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: darkblue;
+            color: lightblue;
+        }
+
+        header {
+            background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?fit=crop&w=1200&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            animation: slideDown 1s ease-out;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        nav {
+            background-color: navy;
+            padding: 10px;
+            text-align: center;
+            position: sticky;
+            top: 60px; /* Adjusted for sticky header */
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: lightblue;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 150px;
+            height: 200px;
+            margin: 10px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
+        img[title]::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: darkblue;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        img:hover[title]::after {
+            display: block;
+        }
+
+        footer {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: darkblue;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: none;
+            transition: background-color 0.3s;
+        }
+
+        #back-to-top:hover {
+            background-color: navy;
+        }
+
+        .accordion {
+            cursor: pointer;
+            transition: background-color 0.6s ease;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+
+        .active, .accordion:hover {
+            background-color: lightblue;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            display: none;
+            overflow: hidden;
+            border: 1px solid lightblue;
+            border-top: none;
+        }
+
+        #dark-mode-toggle, #font-size-toggle {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 1em;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        #dark-mode-toggle:hover, #font-size-toggle:hover {
+            background-color: navy;
+        }
+
+        #font-size-toggle {
+            right: 140px; /* Adjust for multiple buttons */
+        }
+
+        /* Progress bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background-color: darkblue;
+            z-index: 1000;
+        }
+
+        /* Button hover effect */
+        button.accordion {
+            position: relative;
+            overflow: hidden;
+        }
+
+        button.accordion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: lightblue;
+            z-index: -1;
+            transition: height 0.3s;
+        }
+
+        button.accordion:hover::before {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Favorite Books</h1>
+    </header>
+
+    <div id="progress-bar"></div>
+
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
+    <button id="font-size-toggle">Toggle Font Size</button>
+
+    <nav>
+        <a href="#intro">Introduction</a>
+        <a href="#book1">To Kill a Mockingbird</a>
+        <a href="#book2">1984</a>
+        <a href="#book3">The Great Gatsby</a>
+        <a href="#book4">Pride and Prejudice</a>
+        <a href="#book5">The Lord of the Rings</a>
+    </nav>
+    
+    <main>
+        <section id="intro">
+            <h2>Welcome to My Book List</h2>
+            <p>Welcome to my favorite books list! Here, I have compiled a selection of my most cherished reads. These books have made a significant impact on me and I hope you find them as inspiring and thought-provoking as I did. Let's dive into these literary gems!</p>
+        </section>
+
+        <button class="accordion">1. To Kill a Mockingbird by Harper Lee</button>
+        <div class="panel" id="book1">
+            <img src="https://i.pinimg.com/originals/f4/7a/64/f47a642c4305ed36dac03411e447a0c5.jpg" alt="To Kill a Mockingbird" title="A gripping story of racial injustice.">
+            <p>This is a classic novel of modern American literature. It is widely read in schools and deals with serious issues like racial inequality and rape.</p>
+            <ul>
+                <li>Published: 1960</li>
+                <li>Genre: Southern Gothic, Bildungsroman</li>
+                <li>Awards: Pulitzer Prize for Fiction (1961)</li>
+            </ul>
+        </div>
+
+        <button class="accordion">2. 1984 by George Orwell</button>
+        <div class="panel" id="book2">
+            <img src="https://kopp-medien.websale.net/bilder/gross/133206.jpg" alt="1984" title="A haunting vision of the future.">
+            <p>A dystopian novel set in a totalitarian society ruled by Big Brother. It explores themes of government surveillance and propaganda.</p>
+            <ul>
+                <li>Published: 1949</li>
+                <li>Genre: Dystopian, Political fiction, Social science fiction</li>
+                <li>Awards: Prometheus Hall of Fame Award</li>
+            </ul>
+        </div>
+
+        <button class="accordion">3. The Great Gatsby by F. Scott Fitzgerald</button>
+        <div class="panel" id="book3">
+            <img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781471173936/the-great-gatsby-9781471173936_hr.jpg" alt="The Great Gatsby" title="A tragic tale of love and loss.">
+            <p>A story of the wealthy Jay Gatsby and his love for Daisy Buchanan, set in the Jazz Age of the 1920s. It is a critical look at the American Dream.</p>
+            <ul>
+                <li>Published: 1925</li>
+                <li>Genre: Tragedy</li>
+                <li>Awards: N/A</li>
+            </ul>
+        </div>
+
+        <button class="accordion">4. Pride and Prejudice by Jane Austen</button>
+        <div class="panel" id="book4">
+            <img src="https://cdn2.penguin.com.au/covers/original/9780141949055.jpg" alt="Pride and Prejudice" title="A witty commentary on society.">
+            <p>A romantic novel that also critiques the British landed gentry at the end of the 18th century. It is a story of love and social standing.</p>
+            <ul>
+                <li>Published: 1813</li>
+                <li>Genre: Classic Regency novel</li>
+                <li>Awards: N/A</li>
+            </ul>
+        </div>
+
+        <button class="accordion">5. The Lord of the Rings by J.R.R. Tolkien</button>
+        <div class="panel" id="book5">
+            <img src="https://images.thenile.io/r1000/9780008387921.jpg" alt="The Lord of the Rings" title="An epic journey through Middle-earth.">
+            <p>An epic fantasy novel that follows the quest to destroy the One Ring and defeat Sauron. It is a tale of heroism, friendship, and sacrifice.</p>
+            <ul>
+                <li>Published: 1954-1955</li>
+                <li>Genre: High fantasy, Adventure</li>
+                <li>Awards: International Fantasy Award (1957), Prometheus Hall of Fame Award (2009)</li>
+            </ul>
+        </div>
+
+        <a id="back-to-top" href="#top">Back to Top</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Book List</p>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Font size toggle
+        const fontSizeToggle = document.getElementById('font-size-toggle');
+        fontSizeToggle.addEventListener('click', () => {
+            if (document.body.style.fontSize === '1.2em') {
+                document.body.style.fontSize = '1em';
+            } else {
+                document.body.style.fontSize = '1.2em';
+            }
+        });
+
+        // Accordion functionality
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(accordion => {
+            accordion.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.display === 'block') {
+                    panel.style.display = 'none';
+                } else {
+                    panel.style.display = 'block';
+                }
+            });
+        });
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        // Progress bar functionality
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+    </script>
+
+</body>
+</html>
